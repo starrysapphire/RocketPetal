@@ -93,7 +93,6 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        console.log('meow');
     
         // GAME OVER flag
         this.gameOver = false;
@@ -109,6 +108,10 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+          // check key input for restart
+         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.scene.restart();
+}
         this.starfield.tilePositionX -= 2;
 
         if (!this.gameOver) {               
@@ -161,7 +164,8 @@ class Play extends Phaser.Scene {
         });
         // score add and repaint
         this.p1Score += ship.points;
-        this.scoreLeft.text = this.p1Score; 
-        console.log('hewwo');    //score not updating for some reason? check on later
+        this.scoreLeft.text = this.p1Score;
+
+        this.sound.play('sfx_explosion');
     }
 }
