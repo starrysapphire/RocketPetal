@@ -21,9 +21,9 @@ Display the time remaining (in seconds) on the screen (10)
 CREDITS:
 Base rocket patrol code provided by Adam Smith and Nathan Altice.
 All artwork and UI changes by me.
-Background music and twinkle sound effects by Autumn Moulios. (Check out the background track on her soundcloud here! https://soundcloud.com/strawberry-moondae/softly-dreaming)
+Background music by Autumn Moulios. (Check out the background track on her soundcloud here! https://soundcloud.com/strawberry-moondae/softly-dreaming)
 Bee buzzing sfx recorded by byjoshberry on Freesound. (https://freesound.org/people/byjoshberry/sounds/478315/)
-Select and bee launch sfx made by me.
+Select, twinkle, and bee launch sfx made by me.
 */
 
 let config = {
