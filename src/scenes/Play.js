@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     preload () {
-        this.load.audio('my wifes poggers music', 'assets/11 Softly Dreaming (2018).wav');
+        this.load.audio('my wifes poggers music', './assets/11 Softly Dreaming (2018).wav');
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('spaceship', 'assets/spaceship.png');
@@ -13,10 +13,14 @@ class Play extends Phaser.Scene {
     }
 
     create () {
-
         //background music
-        this.track = this.sound.add('my wifes poggers music', {volume: 0.7}); //lowers the volume cause it was a little loud
-        this.track.play();
+        if (!this.music) {
+            this.music = this.sound.add('my wifes poggers music', {
+                loop: true
+            })
+        }
+        /* Play music. */
+        this.music.play();
 
         this.starfield = this.add.tileSprite(
             0,0, 640,480, 'starfield'
@@ -177,6 +181,6 @@ class Play extends Phaser.Scene {
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
 
-        this.sound.play('sfx_explosion');
+        this.sound.play('sfx_twinkle1');
     }
 }
