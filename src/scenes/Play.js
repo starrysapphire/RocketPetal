@@ -14,13 +14,13 @@ class Play extends Phaser.Scene {
 
     create () {
         //background music
-        if (!this.music) {
-            this.music = this.sound.add('my wifes poggers music', {
+        if (!this.backgroundMusic) {
+            this.backgroundMusic = this.sound.add('my wifes poggers music', {
                 loop: true
             })
         }
-        /* Play music. */
-        this.music.play();
+        //plays track once game starts
+        this.backgroundMusic.play();
 
         this.starfield = this.add.tileSprite(
             0,0, 640,480, 'starfield'
@@ -181,6 +181,19 @@ class Play extends Phaser.Scene {
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
 
-        this.sound.play('sfx_twinkle1');
+        // Chooses 1 of 4 twinkle sfx and randomizes which one plays on impact
+        let value = Phaser.Math.Between(1, 4);
+        if(value == 1) {
+            this.sound.play('sfx_twinkle1');
+        }
+        else if(value == 2) {
+            this.sound.play('sfx_twinkle2');
+        }
+        else if(value == 3) {
+            this.sound.play('sfx_twinkle3');
+        }
+        else if(value == 4) {
+            this.sound.play('sfx_twinkle4');
+        }
     }
 }
