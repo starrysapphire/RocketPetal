@@ -4,6 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     preload () {
+        this.load.audio('my wifes poggers music', 'assets/11 Softly Dreaming (2018).wav');
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('spaceship', 'assets/spaceship.png');
@@ -12,6 +13,10 @@ class Play extends Phaser.Scene {
     }
 
     create () {
+
+        //background music
+        this.sound.add('my wifes poggers music').play();
+
         this.starfield = this.add.tileSprite(
             0,0, 640,480, 'starfield'
         ).setOrigin(0,0);
