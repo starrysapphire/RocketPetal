@@ -15,7 +15,8 @@ class Play extends Phaser.Scene {
     create () {
 
         //background music
-        this.sound.add('my wifes poggers music').play();
+        this.track = this.sound.add('my wifes poggers music', {volume: 0.7}); //lowers the volume cause it was a little loud
+        this.track.play();
 
         this.starfield = this.add.tileSprite(
             0,0, 640,480, 'starfield'
