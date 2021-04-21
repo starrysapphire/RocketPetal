@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
         this.load.image('orange flower', 'assets/orange_flower.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth : 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('orange flower explosion', 'assets/orange flower explosion.png', {frameWidth: 48, frameHeight: 24, startframe: 0, endFrame: 9});
     }
 
     create () {
@@ -76,10 +77,10 @@ class Play extends Phaser.Scene {
 
 
         //white borders
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        // this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        // this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        // this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        // this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
         
           // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -93,6 +94,13 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
+
+        //orange flower animation config
+        this.anims.create({ 
+            key: 'orange explode',
+            frames: this.anims.generateFrameNumbers('orange flower explosion', { start: 0, end: 9, first: 0}),
+            frameRate: 30
+        });
         
         // initialize score
         this.p1Score = 0;
@@ -101,8 +109,8 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#C8D98B',
+            color: '#224029',
             align: 'right',
             padding: {
                 top: 5,
@@ -119,7 +127,7 @@ class Play extends Phaser.Scene {
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu',  
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press R to Restart or ← for Menu',  
             scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         },  null, this);
@@ -211,12 +219,12 @@ class Play extends Phaser.Scene {
         }
     }
 
-    OrangeFlowerExplode(ship) {
+    OrangeFlowerExplode(ship) { //collison for orange flower
         //temporarily hide ship
         ship.alpha = 0;
         //create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
-        boom.anims.play('explode');             // play explode animation
+        let boom = this.add.sprite(ship.x, ship.y, 'orange flower explosion').setOrigin(0,0);
+        boom.anims.play('orange explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after anim completes
             ship.reset();                         // reset ship position
             ship.alpha = 1;                       // make ship visible again
