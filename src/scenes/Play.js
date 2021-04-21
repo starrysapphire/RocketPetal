@@ -6,8 +6,8 @@ class Play extends Phaser.Scene {
     preload () {
         this.load.audio('my wifes poggers music', './assets/11 Softly Dreaming (2018).wav');
         this.load.image('starfield', 'assets/starfield.png');
-        this.load.image('rocket', 'assets/rocket.png');
-        this.load.image('spaceship', 'assets/spaceship.png');
+        this.load.image('red flower', 'assets/red_flower.png');
+        this.load.image('bee', 'assets/bee_sprite.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth : 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
@@ -26,12 +26,12 @@ class Play extends Phaser.Scene {
             0,0, 640,480, 'starfield'
         ).setOrigin(0,0);
 
-        //add rocket (p1, since originally multiplayer game)
+        //add bee (p1, since originally multiplayer game)
         this.p1Rocket = new Rocket(
             this, 
             game.config.width/2,
             game.config.height - borderUISize - borderPadding,
-            'rocket'
+            'bee'
         );
 
         //add spaceships
@@ -39,21 +39,21 @@ class Play extends Phaser.Scene {
         this.ship1 = new Ship (this, 
             game.config.width + borderUISize*6, 
             borderUISize*4, 
-            'spaceship', 
+            'red flower', 
             0, 
             30).setOrigin(0, 0);
 
         this.ship2 = new Ship (this, 
             game.config.width + borderUISize*3, 
             borderUISize*5 + borderPadding*2, 
-            'spaceship',
+            'red flower',
              0, 
              20).setOrigin(0, 0);
 
         this.ship3 = new Ship (this, 
             game.config.width,
             borderUISize*6 + borderPadding * 4, 
-            'spaceship', 
+            'red flower', 
             0, 
             10).setOrigin(0, 0);
 
@@ -130,7 +130,7 @@ class Play extends Phaser.Scene {
         this.starfield.tilePositionX -= 2;
 
         if (!this.gameOver) {               
-            this.p1Rocket.update();         // update rocket sprite
+            this.p1Rocket.update();         // update bee sprite
             this.ship1.update();           // update spaceships (x3)
             this.ship2.update();
             this.ship3.update();
