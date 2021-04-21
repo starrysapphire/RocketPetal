@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('red flower', 'assets/red_flower.png');
         this.load.image('bee', 'assets/bee_sprite.png');
+        this.load.image('orange flower', 'assets/orange_flower.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth : 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
@@ -57,14 +58,21 @@ class Play extends Phaser.Scene {
             0, 
             10).setOrigin(0, 0);
 
-        //green UI background
-        this.add.rectangle (
-            0,
-            borderUISize + borderPadding,
+        this.ship4 = new OrangeFlower (this, //new flower (spaceship) type that's smaller and worth more points
             game.config.width,
-            borderUISize*2,
-            0x00FF00,
-            ).setOrigin (0,0);
+            borderUISize*3,
+            'orange flower',
+            0,
+            50).setOrigin(0, 0);
+        
+        // //green UI background
+        // this.add.rectangle (
+        //     0,
+        //     borderUISize + borderPadding,
+        //     game.config.width,
+        //     borderUISize*2,
+        //     0x00FF00,
+        //     ).setOrigin (0,0);
 
 
         //white borders
@@ -131,13 +139,14 @@ class Play extends Phaser.Scene {
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update bee sprite
-            this.ship1.update();           // update spaceships (x3)
+            this.ship1.update();           // updates flowers (x4)
             this.ship2.update();
             this.ship3.update();
+            this.ship4.update();
         } 
 
       // check collisions
-        if(this.checkCollision(this.p1Rocket, this.ship3)) {
+        if (this.checkCollision(this.p1Rocket, this.ship3)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship3);
         }
@@ -150,6 +159,11 @@ class Play extends Phaser.Scene {
         if (this.checkCollision(this.p1Rocket, this.ship1)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship1);
+        }
+
+        if (this.checkCollision(this.p1Rocket, this.ship4)) {
+            this.p1Rocket.reset();
+            this.OrangeFlowerExplode(this.ship4);
         }
     }
 
@@ -183,16 +197,47 @@ class Play extends Phaser.Scene {
 
         // Chooses 1 of 4 twinkle sfx and randomizes which one plays on impact
         let value = Phaser.Math.Between(1, 4);
-        if(value == 1) {
+        if (value == 1) {
             this.sound.play('sfx_twinkle1');
         }
         else if(value == 2) {
             this.sound.play('sfx_twinkle2');
         }
-        else if(value == 3) {
+        else if (value == 3) {
             this.sound.play('sfx_twinkle3');
         }
-        else if(value == 4) {
+        else if (value == 4) {
+            this.sound.play('sfx_twinkle4');
+        }
+    }
+
+    OrangeFlowerExplode(ship) {
+        //temporarily hide ship
+        ship.alpha = 0;
+        //create explosion sprite at ship's position
+        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
+        boom.anims.play('explode');             // play explode animation
+        boom.on('animationcomplete', () => {    // callback after anim completes
+            ship.reset();                         // reset ship position
+            ship.alpha = 1;                       // make ship visible again
+            boom.destroy();                       // remove explosion sprite
+        });
+        // score add and repaint
+        this.p1Score += ship.points;
+        this.scoreLeft.text = this.p1Score;
+
+        // Chooses 1 of 4 twinkle sfx and randomizes which one plays on impact
+        let value = Phaser.Math.Between(1, 4);
+        if (value == 1) {
+            this.sound.play('sfx_twinkle1');
+        }
+        else if (value == 2) {
+            this.sound.play('sfx_twinkle2');
+        }
+        else if (value == 3) {
+            this.sound.play('sfx_twinkle3');
+        }
+        else if (value == 4) {
             this.sound.play('sfx_twinkle4');
         }
     }

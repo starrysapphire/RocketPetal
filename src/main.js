@@ -3,7 +3,7 @@ GENERAL INFO:
 Name: Stevie Rodriguez
 Project Title: Rocket Petal (the Rocket Patrol mod)
 Date: April 17, 2021
-How long it took to complete the project: 6 hours so far (started at 10 pm on april 17)
+How long it took to complete the project: 9 hours so far (started at 10 pm on april 17)
 
 ..............................................................................................................
 
