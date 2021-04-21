@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload () {
         this.load.audio('my wifes poggers music', './assets/11 Softly Dreaming (2018).wav');
         this.load.image('grassy background', 'assets/Scrolling Background.png');
+        this.load.image('clouds background', 'assets/heart clouds.png');
         this.load.image('red flower', 'assets/red_flower.png');
         this.load.image('bee', 'assets/bee_sprite.png');
         this.load.image('orange flower', 'assets/orange_flower.png');
@@ -24,8 +25,13 @@ class Play extends Phaser.Scene {
         //plays track once game starts
         this.backgroundMusic.play();
 
+        //background images
         this.grassybackground = this.add.tileSprite(
             0,0, 640,480, 'grassy background'
+        ).setOrigin(0,0);
+
+        this.cloudsbackground = this.add.tileSprite(
+            0,0, 640,480, 'clouds background'
         ).setOrigin(0,0);
 
         //add bee (p1, since originally multiplayer game)
@@ -59,7 +65,8 @@ class Play extends Phaser.Scene {
             0, 
             10).setOrigin(0, 0);
 
-        this.ship4 = new OrangeFlower (this, //new flower (spaceship) type that's smaller and worth more points
+        //new flower (spaceship) type that's smaller and worth more points
+        this.ship4 = new OrangeFlower (this,
             game.config.width,
             borderUISize*3,
             'orange flower',
@@ -88,7 +95,7 @@ class Play extends Phaser.Scene {
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-        // animation config
+        //red flower animation config
         this.anims.create({
             key: 'red explode',
             frames: this.anims.generateFrameNumbers('red flower explosion', { start: 0, end: 9, first: 0}),
@@ -143,7 +150,9 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
         
-        this.grassybackground.tilePositionX -= 2;
+        //parallax scrolling
+        this.grassybackground.tilePositionX -= 3;
+        this.cloudsbackground.tilePositionX -= 1;
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update bee sprite
@@ -189,9 +198,9 @@ class Play extends Phaser.Scene {
     }
 
     shipExplode(ship) { //collison for red flower
-        //temporarily hide ship
+        //temporarily hide flower
         ship.alpha = 0;
-        //create explosion sprite at ship's position
+        //create explosion sprite at flower's position
         let boom = this.add.sprite(ship.x, ship.y, 'red flower explosion').setOrigin(0,0);
         boom.anims.play('red explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after anim completes

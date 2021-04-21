@@ -3,7 +3,7 @@ GENERAL INFO:
 Name: Stevie Rodriguez
 Project Title: Rocket Petal (the Rocket Patrol mod)
 Date: April 17, 2021
-How long it took to complete the project: 9 hours so far (started at 10 pm on april 17)
+How long it took to complete the project: About 12 hours
 
 ..............................................................................................................
 
@@ -15,13 +15,14 @@ Implement parallax scrolling (10)
 Create 4 new explosion SFX and randomize which one plays on impact (10)
  - "Explosion" is more of a twinkle sound since I wanted it to be gentler
 
+ (Total: 100 points)
 ...............................................................................................................
 
 CREDITS:
 Base rocket patrol code provided by Adam Smith and Nathan Altice.
 All artwork and UI changes by me.
-Background music by Autumn Moulios. (Check out the background track on her soundcloud here! https://soundcloud.com/strawberry-moondae/softly-dreaming)
-Select, twinkle, and bee launch sfx made by me using Leshy SFMaker.
+Background music by Strawberry Moondae (Autumn Moulios). Check out the background track on her soundcloud here! https://soundcloud.com/strawberry-moondae/softly-dreaming
+Select, twinkle, and bee launch sfx made by me using Leshy SFMaker (https://www.leshylabs.com/apps/sfMaker/).
 */
 
 let config = {
