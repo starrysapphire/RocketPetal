@@ -5,12 +5,11 @@ class Play extends Phaser.Scene {
 
     preload () {
         this.load.audio('my wifes poggers music', './assets/11 Softly Dreaming (2018).wav');
-        this.load.image('starfield', 'assets/starfield.png');
+        this.load.image('grassy background', 'assets/Scrolling Background.png');
         this.load.image('red flower', 'assets/red_flower.png');
         this.load.image('bee', 'assets/bee_sprite.png');
         this.load.image('orange flower', 'assets/orange_flower.png');
-        // load spritesheet
-        //this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth : 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        // load spritesheets
         this.load.spritesheet('orange flower explosion', 'assets/orange flower explosion.png', {frameWidth: 48, frameHeight: 24, startFrame: 0, endFrame: 9});
         this.load.spritesheet('red flower explosion', 'assets/Red Flower Animation.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
@@ -25,8 +24,8 @@ class Play extends Phaser.Scene {
         //plays track once game starts
         this.backgroundMusic.play();
 
-        this.starfield = this.add.tileSprite(
-            0,0, 640,480, 'starfield'
+        this.grassybackground = this.add.tileSprite(
+            0,0, 640,480, 'grassy background'
         ).setOrigin(0,0);
 
         //add bee (p1, since originally multiplayer game)
@@ -65,7 +64,7 @@ class Play extends Phaser.Scene {
             borderUISize*3,
             'orange flower',
             0,
-            50).setOrigin(0, 0);
+            100).setOrigin(0, 0);
         
         // //green UI background
         // this.add.rectangle (
@@ -144,7 +143,7 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
         
-        this.starfield.tilePositionX -= 2;
+        this.grassybackground.tilePositionX -= 2;
 
         if (!this.gameOver) {               
             this.p1Rocket.update();         // update bee sprite
